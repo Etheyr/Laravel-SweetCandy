@@ -16,3 +16,9 @@ Route::get('/', function () {
 });
 
 Route::get('/bonbons','BonbonController@getIndex');
+
+Route::post('/add','BonbonController@postAdd');
+
+Route::post('/moins/{id}','BonbonController@postMoins');
+
+Route::post('/plus/{id}','BonbonController@postPlus');

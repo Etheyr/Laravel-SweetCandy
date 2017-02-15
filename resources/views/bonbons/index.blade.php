@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta charset="UTF-8">
 	<title>Bonbon</title>
 	<link rel="stylesheet" type="text/css" href="{{ mix('/css/app.css') }}">
@@ -20,18 +21,18 @@
 		</div>
 
 
-		<form action="/" method="post" class="ui form">
+		<form action="/add" method="post" class="ui form">
 			{{csrf_field()}}
 			<div class="ui right aligned category search item">
 				<div class="field">
 					<label for="bonbon">Bonbon</label>
-					<input type="text" name="bonbon" placeholder="Bonbon">
+					<input type="text" name="name" placeholder="Bonbon">
 				</div>
 
 
 				<div class="field">
 					<label for="stock">Stock</label>
-					<input type="text" name="decalage" placeholder="Decalage">
+					<input type="text" name="stock" placeholder="Stock">
 				</div>
 
 
@@ -66,11 +67,26 @@
 				</div>
 
 				<div class="extra content">
-					<span class="left floated">
+					<span id="docker" class="left floated">
 						Stock :	{{$value->stock}}
 					</span>
 				</div>
 
+				<div class="ui big buttons">
+
+					<form id="moins" action="/moins/{{$value->id}}" method="POST">
+						{{csrf_field()}}
+						<button class="ui red button"><i class="minus icon"></i></button>:
+					</form>
+
+					<div class="or"></div>
+
+					<form id="plus" action="/plus/{{$value->id}}" method="POST">
+						{{csrf_field()}}
+						<button class="ui green button"><i class="plus icon"></i></button>
+					</form>
+
+				</div>
 			</div>
 
 			@endforeach

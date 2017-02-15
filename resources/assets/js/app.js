@@ -1,20 +1,37 @@
+console.log('fred ma menti');
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+$('#moins').on('submit', function(event){
+	event.preventDefault();
 
-require('./bootstrap');
+	$.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+	$.ajax({
+		url : "/moins"+id,
+		type : "POST",
+		success : function(response){
+			$('#docker').html(response);
+		}
+	});
+});
 
-Vue.component('example', require('./components/Example.vue'));
+$('#plus').on('submit', function(){
+	event.preventDefault();
 
-const app = new Vue({
-    el: '#app'
+	$.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
+
+	$.ajax({
+		url : "/plus"+id,
+		type : "POST",
+		success : function(response){
+			$('#docker').html(response);
+		}
+	});
 });
